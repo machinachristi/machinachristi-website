@@ -1,0 +1,10 @@
+{
+  "name": "machinachristi-api",
+  "version": "1.0.0",
+  "description": "Azure Functions API for Machina Christi chat",
+  "scripts": {
+    "start": "func start"
+  },
+  "dependencies": {},
+  "devDependencies": {}
+}

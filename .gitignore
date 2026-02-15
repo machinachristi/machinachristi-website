@@ -8,3 +8,14 @@
 *.swp
 *.swo
 *~
+
+# Azure Functions
+api/local.settings.json
+.funcignore
+__azurite_db*__.json
+__blobstorage__
+__queuestorage__
+__azurite_db*__.json
+.python_packages
+bin
+obj

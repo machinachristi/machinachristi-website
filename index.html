@@ -20,5 +20,29 @@
         <p class="subtitle">Coming Soon</p>
         <p class="email">machinachristi@gmail.com</p>
     </main>
+
+    <!-- Chat Widget -->
+    <div id="chat-button" onclick="toggleChat()">
+        <span>💬</span>
+    </div>
+
+    <div id="chat-widget" class="chat-hidden">
+        <div class="chat-header">
+            <span>Chat with Machina Christi</span>
+            <button onclick="toggleChat()" class="chat-close">&times;</button>
+        </div>
+        <div id="chat-messages"></div>
+        <div class="chat-input-container">
+            <input
+                type="text"
+                id="chat-input"
+                placeholder="Type a message..."
+                onkeypress="handleKeyPress(event)"
+            />
+            <button onclick="sendMessage()" id="send-button">Send</button>
+        </div>
+    </div>
+
+    <script src="chat.js"></script>
 </body>
 </html>
