@@ -1,0 +1,10 @@
+{
+  "name": "machinachristi-website",
+  "version": "1.0.0",
+  "description": "Machina Christi website with Azure Functions",
+  "scripts": {
+    "build": "echo 'No build step needed'",
+    "test": "echo 'No tests configured'"
+  },
+  "dependencies": {}
+}
