@@ -19,13 +19,22 @@
         <main class="homepage-content">
             <h1>MACHINA CHRISTI</h1>
             <div class="homepage-input-container">
-                <input
-                    type="text"
-                    id="homepage-input"
-                    class="homepage-input"
-                    placeholder="Hello friend, how are you?"
-                    onkeypress="if(event.key==='Enter') sendMessage(this)"
-                />
+                <div class="homepage-input-wrapper">
+                    <input
+                        type="text"
+                        id="homepage-input"
+                        class="homepage-input"
+                        placeholder="Hello friend, how are you?"
+                        onkeypress="if(event.key==='Enter') sendMessage(document.getElementById('homepage-input'))"
+                    />
+                    <button
+                        onclick="sendMessage(document.getElementById('homepage-input'))"
+                        class="homepage-send-button"
+                    >
+                        Send
+                    </button>
+                </div>
+                <p class="homepage-helper-text">or press return to send</p>
             </div>
         </main>
     </div>

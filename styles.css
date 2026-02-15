@@ -62,8 +62,14 @@ body {
     width: 100%;
 }
 
-.homepage-input {
+.homepage-input-wrapper {
+    display: flex;
+    gap: 12px;
     width: 100%;
+}
+
+.homepage-input {
+    flex: 1;
     padding: 20px 24px;
     font-size: 1.1rem;
     font-family: inherit;
@@ -82,6 +88,32 @@ body {
 
 .homepage-input::placeholder {
     color: #999;
+}
+
+.homepage-send-button {
+    padding: 14px 28px;
+    background-color: #333;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 500;
+    font-family: inherit;
+    transition: background-color 0.2s;
+    white-space: nowrap;
+}
+
+.homepage-send-button:hover {
+    background-color: #000;
+}
+
+.homepage-helper-text {
+    margin-top: 12px;
+    font-size: 0.9rem;
+    color: #999;
+    font-weight: 300;
+    text-align: center;
 }
 
 /* ===== CHAT VIEW ===== */
@@ -230,17 +262,43 @@ body {
         margin-bottom: 30px;
     }
 
+    .homepage-input-wrapper {
+        flex-direction: column;
+        gap: 10px;
+    }
+
     .homepage-input {
         padding: 14px 16px;
         font-size: 0.95rem;
+    }
+
+    .homepage-send-button {
+        width: 100%;
+        padding: 16px;
     }
 
     .chat-view {
         padding: 15px 10px 10px;
     }
 
+    .chat-container {
+        padding: 0 10px;
+    }
+
+    .chat-messages {
+        padding: 30px 0;
+        gap: 30px;
+        width: 100%;
+    }
+
     .chat-message {
-        max-width: 90%;
+        max-width: 85%;
+    }
+
+    .chat-message-text {
+        padding: 14px 16px;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
     }
 
     .chat-input-area {
