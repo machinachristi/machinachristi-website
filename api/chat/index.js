@@ -28,21 +28,15 @@ module.exports = async function (context, req) {
     }
 
     try {
+        // Accept both formats: { message: "text" } or { messages: [...] }
         const userMessage = req.body.message;
+        const messages = req.body.messages;
 
-        if (!userMessage) {
-            context.res = {
-                status: 400,
-                body: { error: 'Message is required' }
-            };
-            return;
-        }
-
-        // Prepare the request to Azure AI
-        const aiEndpoint = `${ENDPOINT}/openai/deployments/${DEPLOYMENT_NAME}/chat/completions?api-version=2024-08-01-preview`;
-
-        const requestBody = JSON.stringify({
-            messages: [
+        let conversationMessages;
+        if (messages && Array.isArray(messages)) {
+            conversationMessages = messages;
+        } else if (userMessage) {
+            conversationMessages = [
                 {
                     role: "system",
                     content: "You are a helpful assistant for Machina Christi. Be friendly, concise, and helpful."
@@ -51,7 +45,22 @@ module.exports = async function (context, req) {
                     role: "user",
                     content: userMessage
                 }
-            ],
+            ];
+        } else {
+            context.res = {
+                status: 400,
+                body: { error: 'Message is required' }
+            };
+            return;
+        }
+
+        // Prepare the request to Azure AI Foundry
+        // AI Foundry uses /chat/completions (not /openai/deployments/...)
+        const aiEndpoint = `${ENDPOINT}/chat/completions?api-version=2024-02-15-preview`;
+
+        const requestBody = JSON.stringify({
+            messages: conversationMessages,
+            model: DEPLOYMENT_NAME,  // Model name goes in the request body for AI Foundry
             max_tokens: 800,
             temperature: 0.7
         });
