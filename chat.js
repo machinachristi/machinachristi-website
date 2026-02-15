@@ -1,5 +1,5 @@
 // Chat functionality
-const FUNCTION_URL = 'https://YOUR-FUNCTION-APP-NAME.azurewebsites.net/api/chat';
+const FUNCTION_URL = 'https://machinachristi-api-cghtfmdweffxf8ez.centralus-01.azurewebsites.net/api/chat';
 
 function toggleChat() {
     const chatWidget = document.getElementById('chat-widget');
