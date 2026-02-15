@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Machina Christi - Coming Soon">
+    <meta name="description" content="Machina Christi - AI Assistant">
     <title>Machina Christi</title>
     <link rel="stylesheet" href="styles.css">
 </head>
@@ -14,32 +14,36 @@
     <!-- Right column -->
     <div class="column column-right"></div>
 
-    <!-- Main content -->
-    <main class="content">
-        <h1>MACHINA CHRISTI</h1>
-        <p class="subtitle">Coming Soon</p>
-        <p class="email">machinachristi@gmail.com</p>
-    </main>
-
-    <!-- Chat Widget -->
-    <div id="chat-button" onclick="toggleChat()">
-        <span>💬</span>
+    <!-- Homepage View (centered input) -->
+    <div id="homepage-view" class="homepage-view">
+        <main class="homepage-content">
+            <h1>MACHINA CHRISTI</h1>
+            <div class="homepage-input-container">
+                <input
+                    type="text"
+                    id="homepage-input"
+                    class="homepage-input"
+                    placeholder="Hello friend, how are you?"
+                    onkeypress="if(event.key==='Enter') sendMessage(this)"
+                />
+            </div>
+        </main>
     </div>
 
-    <div id="chat-widget" class="chat-hidden">
-        <div class="chat-header">
-            <span>Chat with Machina Christi</span>
-            <button onclick="toggleChat()" class="chat-close">&times;</button>
-        </div>
-        <div id="chat-messages"></div>
-        <div class="chat-input-container">
-            <input
-                type="text"
-                id="chat-input"
-                placeholder="Type a message..."
-                onkeypress="handleKeyPress(event)"
-            />
-            <button onclick="sendMessage()" id="send-button">Send</button>
+    <!-- Chat View (full interface) -->
+    <div id="chat-view" class="chat-view hidden">
+        <div class="chat-container">
+            <div id="chat-messages" class="chat-messages"></div>
+            <div class="chat-input-area">
+                <input
+                    type="text"
+                    id="chat-input"
+                    class="chat-input"
+                    placeholder="Type a message..."
+                    onkeypress="if(event.key==='Enter') sendMessage()"
+                />
+                <button onclick="sendMessage()" id="send-button" class="send-button">Send</button>
+            </div>
         </div>
     </div>
 

@@ -1,32 +1,20 @@
 // Chat functionality
 const FUNCTION_URL = 'https://machinachristi-api-cghtfmdweffxf8ez.centralus-01.azurewebsites.net/api/chat';
 
-function toggleChat() {
-    const chatWidget = document.getElementById('chat-widget');
-    const chatButton = document.getElementById('chat-button');
-
-    if (chatWidget.classList.contains('chat-hidden')) {
-        chatWidget.classList.remove('chat-hidden');
-        chatWidget.classList.add('chat-visible');
-        chatButton.style.display = 'none';
-    } else {
-        chatWidget.classList.remove('chat-visible');
-        chatWidget.classList.add('chat-hidden');
-        chatButton.style.display = 'flex';
-    }
-}
-
-function handleKeyPress(event) {
-    if (event.key === 'Enter') {
-        sendMessage();
-    }
-}
-
-async function sendMessage() {
-    const input = document.getElementById('chat-input');
+async function sendMessage(sourceInput) {
+    // Detect which input to use (homepage or chat input)
+    const input = sourceInput || document.getElementById('chat-input');
     const message = input.value.trim();
 
     if (!message) return;
+
+    // Transition from homepage to chat view if needed
+    const homepageView = document.getElementById('homepage-view');
+    const chatView = document.getElementById('chat-view');
+    if (homepageView && !homepageView.classList.contains('hidden')) {
+        homepageView.classList.add('hidden');
+        chatView.classList.remove('hidden');
+    }
 
     // Clear input
     input.value = '';
@@ -36,10 +24,13 @@ async function sendMessage() {
 
     // Disable send button while waiting
     const sendButton = document.getElementById('send-button');
-    sendButton.disabled = true;
-    sendButton.textContent = '...';
+    if (sendButton) {
+        sendButton.disabled = true;
+        sendButton.textContent = '...';
+    }
 
     try {
+        // ✅ IDENTICAL API CALL - NO CHANGES
         const response = await fetch(FUNCTION_URL, {
             method: 'POST',
             headers: {
@@ -48,25 +39,30 @@ async function sendMessage() {
             body: JSON.stringify({ message })
         });
 
+        // ✅ IDENTICAL - NO CHANGES
         if (!response.ok) {
             throw new Error('Network response was not ok');
         }
 
+        // ✅ IDENTICAL - NO CHANGES
         const data = await response.json();
 
-        // Extract the AI response
+        // ✅ IDENTICAL - NO CHANGES
         const aiMessage = data.choices?.[0]?.message?.content || 'Sorry, I could not generate a response.';
 
-        // Add AI message to chat
+        // ✅ IDENTICAL - NO CHANGES
         addMessage(aiMessage, 'assistant');
 
     } catch (error) {
+        // ✅ IDENTICAL - NO CHANGES
         console.error('Error:', error);
         addMessage('Sorry, there was an error processing your request.', 'assistant');
     } finally {
         // Re-enable send button
-        sendButton.disabled = false;
-        sendButton.textContent = 'Send';
+        if (sendButton) {
+            sendButton.disabled = false;
+            sendButton.textContent = 'Send';
+        }
     }
 }
 
